@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: fl-front-deploy
+  name: fl-front-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fl-front-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fl-front-deploy
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/labproj05/fl-front:6
+        name: fl-front
+        envFrom:
+        - configMapRef:
+            name: fl-front-cmap
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}
